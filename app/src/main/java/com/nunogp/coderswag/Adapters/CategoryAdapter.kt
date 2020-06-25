@@ -19,17 +19,29 @@ class CategoryAdapter(context: Context, categories: List<Category>):BaseAdapter(
      override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
        //to change body of created functions use | settings | File Template
         val categoryView : View
-        categoryView = LayoutInflater.from(context).inflate(R.layout.category_list_item, null)
-        val categoryImage : ImageView = categoryView.findViewById(R.id.categoryImage)
-        //textfield ID categoryName
-        val categoryName : TextView = categoryView.findViewById(R.id.categoryName)
+        val holder : ViewHolder
+
+        if (convertView == null){
+            categoryView = LayoutInflater.from(context).inflate(R.layout.category_list_item, null)
+            holder = ViewHolder()
+            holder.categoryImage = categoryView.findViewById(R.id.categoryImage)
+            //textfield ID categoryName
+            holder.categoryName = categoryView.findViewById(R.id.categoryName)
+            categoryView.tag = holder
+            //println("I exist for the first time.")
+        }else{
+            holder = convertView.tag as ViewHolder
+            categoryView = convertView
+            //println("Go green, recycle!")
+        }
+
         val category =  categories[position]
         //convert image name into id resource
         val resourceId =  context.resources.getIdentifier(category.image, "drawable", context.packageName)
         //imageId categoryName
-        categoryImage.setImageResource(resourceId)
+        holder.categoryImage?.setImageResource(resourceId)
         //println(resourceId)
-        categoryName.text = category.title
+        holder.categoryName?.text = category.title
         return categoryView
     }
 
@@ -44,4 +56,11 @@ class CategoryAdapter(context: Context, categories: List<Category>):BaseAdapter(
     override fun getCount(): Int {
         return categories.count()
     }
+
+    //made class for view holder
+    private class ViewHolder {
+        var categoryImage : ImageView? = null
+        var categoryName : TextView? = null
+    }
+
 }
