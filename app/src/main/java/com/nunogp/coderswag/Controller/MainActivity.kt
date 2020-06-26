@@ -2,9 +2,11 @@ package com.nunogp.coderswag.Controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nunogp.coderswag.Adapters.CategoryAdapter
 import com.nunogp.coderswag.Adapters.CategoryRecycleAdapter
+import com.nunogp.coderswag.Model.Category
 import com.nunogp.coderswag.R
 import com.nunogp.coderswag.Services.DataService
 import kotlinx.android.synthetic.main.activity_main.*
