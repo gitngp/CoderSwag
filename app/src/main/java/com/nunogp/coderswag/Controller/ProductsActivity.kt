@@ -14,3 +14,4 @@ class ProductsActivity : AppCompatActivity() {
         val categoryType = intent.getStringExtra(EXTRA_CATEGORY)
         Toast.makeText(this, " $categoryType ", Toast.LENGTH_SHORT).show()
     }
+}
