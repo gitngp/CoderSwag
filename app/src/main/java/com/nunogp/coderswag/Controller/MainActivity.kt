@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     //lateinit var adapter : CategoryAdapter//ArrayAdapter<Category>
     lateinit var adapter : CategoryRecycleAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
