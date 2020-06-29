@@ -12,12 +12,12 @@ import com.nunogp.coderswag.R
 
 //2 <>
 //3 secionado PrductsHolder alt+enter implement members selecionar todos 3
-//4 (contrext, products)
-class ProductsAdapter(val context: Context, val products: List<Product> ): RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
+//4 (contrext, products)                                                                model.product
+class ProductsAdapter(val context: Context, val products: List<Product>, val itemClick : (Product)-> Unit): RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
 
     //1selecionado RecycleView alt+enter add constrocter parameters from viewholder (View!)
     //inner class ProductHolder: RecyclerView.ViewHolder{
-    inner class ProductHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+    inner class ProductHolder(itemView: View?, val itemClick: (Product) -> Unit) : RecyclerView.ViewHolder(itemView!!) {
         //5 productImage layout ID
         val productImage = itemView?.findViewById<ImageView>(R.id.productImage)
         val productName = itemView?.findViewById<TextView>(R.id.productName)
@@ -28,7 +28,7 @@ class ProductsAdapter(val context: Context, val products: List<Product> ): Recyc
             productImage?.setImageResource(resourceId)
             productName?.text=product.title
             productPrice?.text=product.price
-
+            itemView.setOnClickListener { itemClick(product) }
         }
 
     }
@@ -36,7 +36,7 @@ class ProductsAdapter(val context: Context, val products: List<Product> ): Recyc
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         //6 criar view pela 1º vez         inflate atatchtoroot viewgroup
         val view = LayoutInflater.from(context).inflate(R.layout.product_list_file, parent, false)
-        return ProductHolder(view)
+        return ProductHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
